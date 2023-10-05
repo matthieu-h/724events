@@ -14,18 +14,17 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const dataEvents = data?.events;
-  const arrayFilter = dataEvents.filter((item) => item.type === type);
-  const filteredEvents = ((type ? arrayFilter : data?.events) || []).filter(
-    (event, index) => {
-      if (
-        (currentPage - 1) * PER_PAGE <= index &&
-        PER_PAGE * currentPage > index
-      ) {
-        return true;
-      }
-      return false;
+  const filteredEvents = (
+    (type ? dataEvents.filter((item) => item.type === type) : dataEvents) || []
+  ).filter((event, index) => {
+    if (
+      (currentPage - 1) * PER_PAGE <= index &&
+      PER_PAGE * currentPage > index
+    ) {
+      return true;
     }
-  );
+    return false;
+  });
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
