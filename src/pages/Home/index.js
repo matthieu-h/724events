@@ -21,8 +21,8 @@ const Page = () => {
     const db = new Date(b.date);
     return da > db ? 1 : -1;
   }
-  eventsArray.sort(SortTime);
-  const [last] = eventsArray.slice(-1);
+  eventsArray?.sort(SortTime);
+  const [last] = eventsArray ? eventsArray.slice(-1) : [];
 
   return (
     <>
@@ -129,7 +129,7 @@ const Page = () => {
             title={last?.title}
             date={new Date(last?.date)}
             small
-            label="boom"
+            label={last?.type}
           />
         </div>
         <div className="col contact">
