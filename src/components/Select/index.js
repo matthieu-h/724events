@@ -90,7 +90,7 @@ Select.propTypes = {
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
-  modifyTypeState: PropTypes.string,
+  modifyTypeState: PropTypes.func,
 };
 
 Select.defaultProps = {
@@ -99,7 +99,7 @@ Select.defaultProps = {
   label: "",
   type: "normal",
   name: "select",
-  modifyTypeState: "",
+  modifyTypeState: () => null,
 };
 
 export default Select;
