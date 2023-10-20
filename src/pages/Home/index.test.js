@@ -29,14 +29,30 @@ describe("When Form is created", () => {
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     // to implement
+    render(<Home />);
+    screen.findByTestId("eventListComponent");
   });
-  it("a list a people is displayed", () => {
+  it("a list a people is displayed", async () => {
     // to implement
+    render(<Home />);
+    await screen.findByText("Samira");
+    await screen.findByText("Jean-baptiste");
+    await screen.findByText("Alice");
   });
   it("a footer is displayed", () => {
     // to implement
+    render(<Home />);
+    screen.findByText("Notre derniére prestation");
+    screen.findByText("45 avenue de la République, 75000 Paris");
+    screen.findByText("01 23 45 67 89");
+    screen.findByText("contact@77events.com");
+    screen.findByText(
+      " Une agence événementielle propose des prestations de services spécialisées"
+    );
   });
   it("an event card, with the last event, is displayed", () => {
     // to implement
+    render(<Home />);
+    screen.findByTestId("lastEventInFooter");
   });
 });
