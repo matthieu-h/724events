@@ -63,7 +63,7 @@ const Page = () => {
         </section>
         <section className="EventsContainer" id="nos-realisations">
           <h2 className="Title">Nos réalisations</h2>
-          <EventList data-testid="eventListComponent" />
+          <EventList />
         </section>
         <section className="PeoplesContainer" id="notre-equipe">
           <h2 className="Title">Notre équipe</h2>

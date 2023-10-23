@@ -1,5 +1,48 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
+import DataContext from "../../contexts/DataContext";
+
+const mockedDataEvents = {
+  events: [
+    {
+      id: 1,
+      type: "conférence",
+      date: "2022-04-29T20:28:45.744Z",
+      title: "User&product MixUsers",
+      cover: "/images/alexandre-pellaes-6vAjp0pscX0-unsplash.png",
+      description: "Présentation des nouveaux usages UX.",
+      nb_guesses: 900,
+      periode: "14-15-16 Avril",
+      prestations: [
+        "1 espace d'exposition",
+        "1 scéne principale",
+        "1 espace de restaurations",
+      ],
+    },
+  ],
+  focus: [
+    {
+      title: "World economic forum",
+      description:
+        "Oeuvre à la coopération entre le secteur public et le privé.",
+      date: "2022-01-29T20:28:45.744Z",
+      cover: "/images/evangeline-shaw-nwLTVwb7DbU-unsplash1.png",
+    },
+    {
+      title: "Nordic design week",
+      description: "Conférences sur le design de demain dans le digital",
+      date: "2022-03-29T20:28:45.744Z",
+      cover: "/images/teemu-paananen-bzdhc5b3Bxs-unsplash1.png",
+    },
+    {
+      title: "Sneakercraze market",
+      description: "Rencontres de spécialistes des Sneakers Européens.",
+      date: "2022-05-29T20:28:45.744Z",
+      cover: "/images/jakob-dalbjorn-cuKJre3nyYc-unsplash 1.png",
+    },
+  ],
+};
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -27,10 +70,14 @@ describe("When Form is created", () => {
 });
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
+  it("a list of events is displayed", async () => {
     // to implement
-    render(<Home />);
-    screen.findByTestId("eventListComponent");
+    render(
+      <DataContext.Provider value={{ data: mockedDataEvents }}>
+        <Home />
+      </DataContext.Provider>
+    );
+    await expect(screen.queryAllByText("User&product MixUsers").length).toBe(2);
   });
   it("a list a people is displayed", async () => {
     // to implement
@@ -50,9 +97,14 @@ describe("When a page is created", () => {
       " Une agence événementielle propose des prestations de services spécialisées"
     );
   });
-  it("an event card, with the last event, is displayed", () => {
+  it("an event card, with the last event, is displayed", async () => {
     // to implement
-    render(<Home />);
-    screen.findByTestId("lastEventInFooter");
+    render(
+      <DataContext.Provider value={{ data: mockedDataEvents }}>
+        <Home />
+      </DataContext.Provider>
+    );
+    await screen.findByTestId("lastEventInFooter");
+    await expect(screen.queryAllByText("User&product MixUsers").length).toBe(2);
   });
 });
